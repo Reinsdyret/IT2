@@ -1,4 +1,4 @@
-let secretNum = 46;
+let secretNum = Math.round(Math.random() * 10 +1);
 let num = document.getElementById("num");
 let btn = document.getElementById("btn");
 let pOutput = document.getElementById("pOutput");
