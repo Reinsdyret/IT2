@@ -38,7 +38,7 @@ console.log(sum);*/ //So this gives the wrong answer, that is because i do not i
 /**
  * What is the largest prime factor of the number 600851475143 ?
  */
-
+/*
 let primeNumbers = [];
 let daNumber = 600851475143;
 function isPrime(n)
@@ -46,7 +46,7 @@ function isPrime(n)
     if (n < 2) return false;
     /**
      * An integer is prime if it is not divisible by any prime less than or equal to its square root
-     **/
+     **//*
     var q = Math.floor(Math.sqrt(n));
     for (var i = 2; i <= q; i++)
     {
@@ -77,4 +77,39 @@ for(let num = primeNumbers.length; num >= 0; num--){
 }
 
 //console.log(primeNumbers);
+*/
 
+var digits = [];
+let list = [];
+
+function digitNum(number) {
+    while(number > 0) {
+        digits.push(number % 10);
+        number = parseInt(number/10);
+    }
+    digits.reverse();
+}
+
+function findPalindrome(){
+    for(let i = 999; i>0; i--){
+        for(let j = 999; j>0; j--){
+            digitNum(i*j);
+            for(let n = 0; n<=digits.length/2; n++){
+                if(digits[n] != digits[-n]){
+                    list.push(0);
+                }else{
+                    list.push(1);
+                }
+                }
+            for(let p = 0; p<= list.length; p++){
+                if(list[p] != 1){
+                    break;
+                }else{
+                    console.log(digits);
+                }
+            }
+            }
+        }
+    }
+
+findPalindrome();
