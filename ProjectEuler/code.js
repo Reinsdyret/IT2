@@ -78,42 +78,33 @@ for(let num = primeNumbers.length; num >= 0; num--){
 
 //console.log(primeNumbers);
 */
+<<<<<<< HEAD
 /**
  * Problem 4
  */
 /*
 var digits = [];
+=======
+>>>>>>> 24363c1c9eb0736e3decfa715f1b3f0d51e0a3de
 let list = [];
+let product;
 
-function digitNum(number) {
-    while(number > 0) {
-        digits.push(number % 10);
-        number = parseInt(number/10);
-    }
-    digits.reverse();
+function digitNum(str) {
+    let stringer = str.split("").reverse().join("");
+    return str === stringer;
 }
 
 function findPalindrome(){
-    for(let i = 999; i>0; i--){
-        for(let j = 999; j>0; j--){
-            digitNum(i*j);
-            for(let n = 0; n<=digits.length/2; n++){
-                if(digits[n] != digits[-n]){
-                    list.push(0);
-                }else{
-                    list.push(1);
-                }
-                }
-            for(let p = 0; p<= list.length; p++){
-                if(list[p] != 1){
-                    break;
-                }else{
-                    console.log(digits);
-                }
-            }
+    for(let i = 999; i>99; i--){
+        for(let j = 999; j>99; j--){
+            product = i * j;
+            let string = product.toString();
+            if(digitNum(string) === true){
+                list.push(product)
             }
         }
     }
+<<<<<<< HEAD
 
 findPalindrome();*/
 
@@ -125,3 +116,8 @@ let oneTwenty = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
  for(let i = 100000;i>2520;i++){
     for(let j = 19; j>=0; j--)
  }
+=======
+}
+findPalindrome();
+console.log(Math.max.apply(null,list));
+>>>>>>> 24363c1c9eb0736e3decfa715f1b3f0d51e0a3de
