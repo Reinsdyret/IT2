@@ -78,38 +78,52 @@ for(let num = primeNumbers.length; num >= 0; num--){
 
 //console.log(primeNumbers);
 */
-
-var digits = [];
+let digits = [];
 let list = [];
+let reversed = [];
 
 function digitNum(number) {
     while(number > 0) {
         digits.push(number % 10);
         number = parseInt(number/10);
     }
+    reversed = digits
     digits.reverse();
+    console.log(digits);
+    console.log(reversed);
 }
 
 function findPalindrome(){
     for(let i = 999; i>0; i--){
-        for(let j = 999; j>0; j--){
+        for(let j = 999; j>998; j--){
             digitNum(i*j);
-            for(let n = 0; n<=digits.length/2; n++){
-                if(digits[n] != digits[-n]){
-                    list.push(0);
-                }else{
-                    list.push(1);
-                }
-                }
-            for(let p = 0; p<= list.length; p++){
-                if(list[p] != 1){
-                    break;
-                }else{
-                    console.log(digits);
-                }
-            }
+            if(checkPalindrome()){
+                console.log(reversed);
             }
         }
     }
+}
 
+
+/*function testForPalindrome(array){
+    let arrayReverse = array.reverse();
+    console.log(arrayReverse);
+    let reversed = arrayReverse.join("");
+    console.log(reversed);
+    return reversed;
+}*/
+
+function arrayToString(array){
+    let newArray = array.join("");
+    return newArray;
+}
+
+function checkPalindrome(){
+    if(arrayToString(reversed) == arrayToString(digits)){
+        return true;
+    }else{
+        digits = [];
+        reversed = [];
+    }
+}
 findPalindrome();
