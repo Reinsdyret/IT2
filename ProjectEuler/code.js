@@ -78,52 +78,24 @@ for(let num = primeNumbers.length; num >= 0; num--){
 
 //console.log(primeNumbers);
 */
-let digits = [];
 let list = [];
-let reversed = [];
+let product;
 
-function digitNum(number) {
-    while(number > 0) {
-        digits.push(number % 10);
-        number = parseInt(number/10);
-    }
-    reversed = digits
-    digits.reverse();
-    console.log(digits);
-    console.log(reversed);
+function digitNum(str) {
+    let stringer = str.split("").reverse().join("");
+    return str === stringer;
 }
 
 function findPalindrome(){
-    for(let i = 999; i>0; i--){
-        for(let j = 999; j>998; j--){
-            digitNum(i*j);
-            if(checkPalindrome()){
-                console.log(reversed);
+    for(let i = 999; i>99; i--){
+        for(let j = 999; j>99; j--){
+            product = i * j;
+            let string = product.toString();
+            if(digitNum(string) === true){
+                list.push(product)
             }
         }
     }
 }
-
-
-/*function testForPalindrome(array){
-    let arrayReverse = array.reverse();
-    console.log(arrayReverse);
-    let reversed = arrayReverse.join("");
-    console.log(reversed);
-    return reversed;
-}*/
-
-function arrayToString(array){
-    let newArray = array.join("");
-    return newArray;
-}
-
-function checkPalindrome(){
-    if(arrayToString(reversed) == arrayToString(digits)){
-        return true;
-    }else{
-        digits = [];
-        reversed = [];
-    }
-}
 findPalindrome();
+console.log(Math.max.apply(null,list));
