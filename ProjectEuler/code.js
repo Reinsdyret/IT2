@@ -78,7 +78,6 @@ for(let num = primeNumbers.length; num >= 0; num--){
 
 //console.log(primeNumbers);
 */
-<<<<<<< HEAD
 /**
  * Problem 4
  */
@@ -94,7 +93,7 @@ function digitNum(str) {
     return str === stringer;
 }
 
-function findPalindrome(){
+Function findPalindrome(){
     for(let i = 999; i>99; i--){
         for(let j = 999; j>99; j--){
             product = i * j;
@@ -104,7 +103,6 @@ function findPalindrome(){
             }
         }
     }
-<<<<<<< HEAD
 
 findPalindrome();*/
 
