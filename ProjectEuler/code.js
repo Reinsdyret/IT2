@@ -83,8 +83,7 @@ for(let num = primeNumbers.length; num >= 0; num--){
  */
 /*
 var digits = [];
-=======
->>>>>>> 24363c1c9eb0736e3decfa715f1b3f0d51e0a3de
+
 let list = [];
 let product;
 
@@ -104,18 +103,29 @@ Function findPalindrome(){
         }
     }
 
-findPalindrome();*/
+findPalindrome();
+console.log(Math.max.apply(null,list));*/
 
 //Problem 5
 /**
  * 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder. What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
  */
 let oneTwenty = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
- for(let i = 100000;i>2520;i++){
-    for(let j = 19; j>=0; j--)
- }
-=======
+let liste = [];
+function testRest(){
+    for(let i = 100000;i>2520;i++){
+        for(let j = 0;j<=19;j++){
+            if(i%oneTwenty[j] == 0){
+                liste.push(i,j);
+                }
+            }
+            if(liste.length == 19){
+                console.log(liste);
+                return;
+            }
+            liste = [];
+        }
 }
-findPalindrome();
-console.log(Math.max.apply(null,list));
->>>>>>> 24363c1c9eb0736e3decfa715f1b3f0d51e0a3de
+testRest();
+
+
