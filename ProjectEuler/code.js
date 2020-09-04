@@ -178,4 +178,4 @@ for(let p = 1; p<= 200000; p++){
     }
 }
 
-console.log(primeList[10002]);*/
+console.log(primeList[10002]);

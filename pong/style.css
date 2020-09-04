@@ -1,4 +1,25 @@
 #gameCanvas{
+    position: relative;
     width: 320px;
     height: 200px;
+    border: 1px solid black;
+}
+
+#leftPaddle{
+    position: absolute;
+    left: 0;
+    top: 75px;
+}
+#rightPaddle{
+    position: absolute;
+    left: 310px;
+    top: 75px;
+}
+
+#ball{
+    position: absolute;
+    left: 150px;
+    top: 90px;
+    width: 10px;
+    height: 10px;
 }
