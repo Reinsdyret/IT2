@@ -109,7 +109,7 @@ console.log(Math.max.apply(null,list));*/
 //Problem 5
 /**
  * 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder. What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
- */
+ *//*
 let i;
 function divide(){
     i = 1;
@@ -125,7 +125,57 @@ function divide(){
     console.log(i - 1);
 }
 
-divide();
+divide();*/
 
+//problem 6
+/**
+ * Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.
+ */
+/*
+let sum = 0;
+let squared = 0;
+let difference = 0;
 
+function getSum(){
+    for(let i = 1; i<=100;i++){
+        sum += i;
+        squared += square(i);
+    }
+    return difference = square(sum) - squared;
+}
 
+function square(num){
+    return Math.pow(num,2);
+}
+
+console.log(getSum());*/
+
+//Problem 7
+/**
+ * What is the 10 001st prime number?
+ */
+/*
+let primeList = [];
+function isPrime(n){
+    if (n < 2) return false;
+    /**
+     * An integer is prime if it is not divisible by any prime less than or equal to its square root
+     **/
+    var q = Math.floor(Math.sqrt(n));
+    for (var i = 2; i <= q; i++)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+for(let p = 1; p<= 200000; p++){
+    if(isPrime(p)){
+        primeList.push(p);
+    }
+}
+
+console.log(primeList[10002]);*/
