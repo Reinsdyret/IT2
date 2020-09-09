@@ -3,13 +3,15 @@ let imgBall = document.getElementById("ball");
 let imgLeftPaddle = document.getElementById("leftPaddle");
 let imgRightPaddle = document.getElementById("rightPaddle");
 
+document.addEventListener('keydown',movePaddle);
+
 let ball = {
     width: 10,
     height: 10,
     x: 150,
     y: 90,
-    speed_x: 1,
-    speed_y: 0.2
+    speed_x: 2,
+    speed_y: 0.4
 };
 
 let leftPaddle = {
@@ -32,16 +34,16 @@ function game(){
     leftPaddle.update();
     checkCollLeft();
     checkCollRight();
+    checkCollTopBot();
 }
 
 function checkCollLeft(){
-    if((leftPaddle.x + leftPaddle.height <= ball.x)
+    if((leftPaddle.x + leftPaddle.width >= ball.x)
     &&
-    
-    (leftPaddle.y + leftPaddle.height >= ball.y)
+    (leftPaddle.y <= ball.y)
     &&
-    (leftPaddle.y <= ball.y + ball.height)
-    ){
+    (leftPaddle.y + leftPaddle.height >= ball.y))
+    {
         ball.speed_x *= -1;
     }
 }
@@ -56,6 +58,16 @@ function checkCollRight(){
         (rightPaddle.y <= ball.y + ball.height)
         ){
         ball.speed_x *= -1;
+    }
+}
+
+function checkCollTopBot(){
+    if(//Check for collision on the bottom
+        (ball.y + ball.height >= 200)
+        || //Check for collision on the top
+        (ball.y <= 0)
+        ){
+            ball.speed_y *= -1;
     }
 }
 ball.update = function(){
@@ -76,11 +88,14 @@ leftPaddle.update = function(){
     imgLeftPaddle.style.top = this.y + "px";
 }
 
-document.onkeydown = function(e){
-    switch(e.keyCode){
-        case(e.keyCode == 38):
-        rightPaddle.update();
+function movePaddle(e){
+    if(e.keyCode == 38){
+        rightPaddle.y -= 2;
+        imgRightPaddle.style.top = rightPaddle.y + "px";  
+    }if(e.keyCode == 40){
+        rightPaddle.y += 2;
+        imgRightPaddle.style.top = rightPaddle.y + "px";
+        }
     }
-}
 
 let interval = setInterval(game,10);
