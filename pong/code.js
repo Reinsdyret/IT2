@@ -8,8 +8,8 @@ let ball = {
     height: 10,
     x: 150,
     y: 90,
-    speed_x: -1,
-    speed_y: 0.1
+    speed_x: 1,
+    speed_y: 0.2
 };
 
 let leftPaddle = {
@@ -29,26 +29,58 @@ let rightPaddle = {
 
 function game(){
     ball.update();
-    checkCollY(ball.x,ball.y,leftPaddle.y, leftPaddle.width, leftPaddle.height,rightPaddle.y,rightPaddle.width);
-    checkCollX(ball.x,ball.y,leftPaddle.y, leftPaddle.width, leftPaddle.height,rightPaddle.y,rightPaddle.width)
+    leftPaddle.update();
+    checkCollLeft();
+    checkCollRight();
 }
 
-function checkCollY(ball_x,ball_y,leftPaddle_y, leftPaddle_width,leftPaddle_height ,rightPaddle_y){
-    if(ball_y == 0 + 10 || ball_y == 200-10){
-        ball.speed_y *= -1;
+function checkCollLeft(){
+    if((leftPaddle.x + leftPaddle.height <= ball.x)
+    &&
+    
+    (leftPaddle.y + leftPaddle.height >= ball.y)
+    &&
+    (leftPaddle.y <= ball.y + ball.height)
+    ){
+        ball.speed_x *= -1;
     }
 }
 
-function checkCollX(ball_x,ball_y,leftPaddle_y, leftPaddle_width,leftPaddle_height ,rightPaddle_y){
-    if(ball_x <= 0 + leftPaddle.width && ball_y <= leftPaddle.y + leftPaddle.height && ball_y >= leftPaddle.y  || ball_x == 320-ball.width && ball_y <= rightPaddle_y && ball_y >= rightPaddle_y - 58){
-        ball_x *= -1;
+function checkCollRight(){
+    if((rightPaddle.x >= ball.x)
+        &&
+        (rightPaddle.x <= ball.x + ball.width)
+        &&
+        (rightPaddle.y + rightPaddle.height >= ball.y)
+        &&
+        (rightPaddle.y <= ball.y + ball.height)
+        ){
+        ball.speed_x *= -1;
     }
 }
 ball.update = function(){
-    imgBall.style.left = this.x + this.speed_x + "px";
+    imgBall.style.left = this.x + "px";
     this.x += this.speed_x;
-    imgBall.style.top = this.y + this.speed_y + "px";
+    imgBall.style.top = this.y + "px";
     this.y += this.speed_y;
+}
+
+rightPaddle.update = function(){
+    this.y += 1;
+    imgRightPaddle.style.top = this.y + "px"
+}
+
+leftPaddle.update = function(){
+    let differanse = this.y + (this.height / 2) - ball.y;
+    this.y -= differanse;
+    imgLeftPaddle.style.top = this.y + "px";
+}
+
+document.onkeydown = function(e){
+    switch(e.keyCode){
+        case(e.keyCode == 38):
+        rightPaddle.update();
+    }
 }
 
 let interval = setInterval(game,10);
