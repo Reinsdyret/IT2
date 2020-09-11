@@ -2,6 +2,14 @@ let gameCanvas = document.getElementById("gameCanvas");
 let imgBall = document.getElementById("ball");
 let imgLeftPaddle = document.getElementById("leftPaddle");
 let imgRightPaddle = document.getElementById("rightPaddle");
+let ballHitSound = document.getElementById("ballHit");
+let scoreLeft = document.getElementById("scoreLeft");
+let scoreRight = document.getElementById("scoreRight");
+let scoreLeftNum = 0;
+let scoreRightNum = 0;
+scoreLeft.innerHTML = scoreLeftNum;
+scoreRight.innerHTML = scoreRightNum;
+ballHitSound.playBackRate = 6;
 
 document.addEventListener('keydown',movePaddle);
 
@@ -35,6 +43,7 @@ function game(){
     checkCollLeft();
     checkCollRight();
     checkCollTopBot();
+    checkCollBackWall();
 }
 
 function checkCollLeft(){
@@ -45,6 +54,7 @@ function checkCollLeft(){
     (leftPaddle.y + leftPaddle.height >= ball.y))
     {
         ball.speed_x *= -1;
+        hitSound();
     }
 }
 
@@ -58,6 +68,7 @@ function checkCollRight(){
         (rightPaddle.y <= ball.y + ball.height)
         ){
         ball.speed_x *= -1;
+        hitSound();
     }
 }
 
@@ -69,6 +80,20 @@ function checkCollTopBot(){
         ){
             ball.speed_y *= -1;
     }
+}
+
+function checkCollBackWall(){
+    //check for collision on back walls, and score points
+    if(ball.x + ball.width >= 320){
+        ball.speed_x *= -1;
+        scoreLeftNum += 1;
+        scoreLeft.innerHTML = scoreLeftNum; 
+
+    }
+}
+
+function hitSound(){
+    ballHitSound.play();
 }
 ball.update = function(){
     imgBall.style.left = this.x + "px";
@@ -89,10 +114,10 @@ leftPaddle.update = function(){
 }
 
 function movePaddle(e){
-    if(e.keyCode == 38){
+    if(e.keyCode == 38 && rightPaddle.y >= 0){
         rightPaddle.y -= 2;
         imgRightPaddle.style.top = rightPaddle.y + "px";  
-    }if(e.keyCode == 40){
+    }if(e.keyCode == 40 && rightPaddle.y + rightPaddle.height <= 200){
         rightPaddle.y += 2;
         imgRightPaddle.style.top = rightPaddle.y + "px";
         }

@@ -7,12 +7,12 @@
 
 #leftPaddle{
     position: absolute;
-    left: 0;
+    left: 5px;
     top: 75px;
 }
 #rightPaddle{
     position: absolute;
-    left: 310px;
+    left: 305px;
     top: 75px;
 }
 
@@ -22,4 +22,22 @@
     top: 90px;
     width: 10px;
     height: 10px;
+}
+
+ul{
+    display: inline;
+    list-style-type: none;
+}
+
+#scoreLeft {
+    position: relative;
+    left: 5px;
+    top: 0;
+    width: 50px;
+}
+
+#scoreRight{
+    position: relative;
+    left: 305px;
+    top: 0;
 }
