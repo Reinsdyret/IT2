@@ -308,8 +308,8 @@ let grid = [
 
 let prodLod = 1;
 let prodLod1 = 1;
-let prodDiag = 1;
-let prodDiag1 = 1;
+let prodDiagRight = 1;
+let prodDiagRight1 = 1;
 let hei;
 
 function multiplyVer(){
@@ -326,28 +326,26 @@ function multiplyVer(){
     }
 }
 
-function multiplyDiag(){
-    for(let row = 0; row<= 16; row++){
-        for(let i = 0; i <= 3; i++){
-            if(row == 19){
-                hei = i;
-            }else{
-                hei = row + i;
+function multiplyDiagRight(){
+    for(let col = 0; col<= 16; col++){
+        for(let row = 0; row <= 16; row++){
+            for(let i = 0; i <= 3; i++){
+                console.log(col+i,row+i);
+                prodDiagRight1 *= grid[col+i][row+i];
             }
-            prodDiag1 *= grid[hei][i];
-            console.log(hei);
+            if(prodDiagRight1 > prodDiagRight){
+                prodDiagRight = prodDiagRight1;
+                prodDiagRight1 = 1;
+            }else{
+                prodDiagRight1 = 1;
+            }
         }
-        if(prodDiag1 > prodDiag){
-            prodDiag = prodDiag1;
-            prodDiag1 = 1;
-        }else{
-            prodDiag1 = 1;
-        }
+        
     }
 }
 
 multiplyVer();
-multiplyDiag();
+multiplyDiagRight();
 
 console.log(prodLod);
-console.log(prodDiag);
+console.log(prodDiagRight);
