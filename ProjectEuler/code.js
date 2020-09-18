@@ -306,3 +306,48 @@ let grid = [
     [01, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 01, 89, 19, 67, 48]
 ];
 
+let prodLod = 1;
+let prodLod1 = 1;
+let prodDiag = 1;
+let prodDiag1 = 1;
+let hei;
+
+function multiplyVer(){
+    for(let x = 0; x<= 19; x++){
+        for(let y = 0; y <= 3; y++){
+            prodLod1 *= grid[x][y];
+        }
+        if(prodLod1 > prodLod){
+            prodLod = prodLod1;
+            prodLod1 = 1;
+        }else{
+            prodLod1 = 1;
+        }
+    }
+}
+
+function multiplyDiag(){
+    for(let row = 0; row<= 16; row++){
+        for(let i = 0; i <= 3; i++){
+            if(row == 19){
+                hei = i;
+            }else{
+                hei = row + i;
+            }
+            prodDiag1 *= grid[hei][i];
+            console.log(hei);
+        }
+        if(prodDiag1 > prodDiag){
+            prodDiag = prodDiag1;
+            prodDiag1 = 1;
+        }else{
+            prodDiag1 = 1;
+        }
+    }
+}
+
+multiplyVer();
+multiplyDiag();
+
+console.log(prodLod);
+console.log(prodDiag);
