@@ -308,30 +308,36 @@ let grid = [
 
 let prodLod = 1;
 let prodLod1 = 1;
+let prodWat = 1;
+let prodWat1 = 1;
 let prodDiagRight = 1;
 let prodDiagRight1 = 1;
+let prodDiagLeft = 1;
+let prodDiagLeft1 = 1;
 let hei;
 
 function multiplyVer(){
-    for(let x = 0; x<= 19; x++){
-        for(let y = 0; y <= 3; y++){
-            prodLod1 *= grid[x][y];
-        }
-        if(prodLod1 > prodLod){
-            prodLod = prodLod1;
-            prodLod1 = 1;
-        }else{
-            prodLod1 = 1;
+    for(let col = 0; col<= 16; col++){
+        for(let x = 0; x<= 19; x++){
+            for(let y = 0; y <= 3; y++){
+                prodLod1 *= grid[y][x];
+            }
+            if(prodLod1 > prodLod){
+                prodLod = prodLod1;
+                prodLod1 = 1;
+            }else{
+                prodLod1 = 1;
+            }
         }
     }
+    
 }
 
 function multiplyDiagRight(){
     for(let col = 0; col<= 16; col++){
         for(let row = 0; row <= 16; row++){
             for(let i = 0; i <= 3; i++){
-                console.log(col+i,row+i);
-                prodDiagRight1 *= grid[col+i][row+i];
+                prodDiagRight1 *= grid[row+i][col+i];
             }
             if(prodDiagRight1 > prodDiagRight){
                 prodDiagRight = prodDiagRight1;
@@ -344,8 +350,49 @@ function multiplyDiagRight(){
     }
 }
 
+function multiplyDiagLeft(){
+    for(let col2 = 3; col2<= 19; col2++){
+        for(let row2 = 0; row2 <= 16; row2++){
+            for(let i = 0; i <= 3; i++){
+                prodDiagLeft1 *= grid[row2+i][col2-i];
+                console.log(prodDiagLeft1);
+            }
+            if(prodDiagLeft1 > prodDiagLeft){
+                prodDiagLeft = prodDiagLeft1;
+                prodDiagLeft1 = 1;
+            }else{
+                prodDiagLeft1 = 1;
+            }
+            console.log(col2,row2);
+        }
+        
+    }
+    
+}
+
+function multiplyWat(){
+    for(let row = 0; row <= 16; row++){
+        for(let x = 0; x<= 19; x++){
+            for(let y = 0; y <= 3; y++){
+                prodWat1 *= grid[x][y + row];
+            }
+            if(prodWat1 > prodWat){
+                prodWat = prodWat1;
+                prodWat1 = 1;
+            }else{
+                prodWat1 = 1;
+            }
+        }
+    }
+    
+}
+
 multiplyVer();
+multiplyWat();
 multiplyDiagRight();
+multiplyDiagLeft();
 
 console.log(prodLod);
+console.log(prodWat);
 console.log(prodDiagRight);
+console.log(prodDiagLeft);
