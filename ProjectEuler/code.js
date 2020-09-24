@@ -282,7 +282,7 @@ console.log(primeNumbers.reduce((a, b) => a + b, 0));*/
  * PROBLEM 11
  * What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
  */
-
+/*
 let grid = [
     [08, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 08],
     [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 04, 56, 62, 00],
@@ -396,3 +396,35 @@ console.log(prodLod);
 console.log(prodWat);
 console.log(prodDiagRight);
 console.log(prodDiagLeft);
+*/
+
+/**
+ * PROBLEM 12
+ * What is the value of the first triangle number to have over five hundred divisors?
+ */
+
+ let divisors = [];
+ let triangle = 100000;
+ while(divisors.length <= 500){
+    triangle++;
+     let sum = triangleNum(triangle);
+     divisors = getDivisors(sum);
+     console.log(triangle);
+     
+ }
+
+ function triangleNum(num){
+     return (num * num+1) / 2;
+ }
+
+ function getDivisors(num){
+     let array = [];
+     for(let i = num; i >= 1; i--){
+         if(num % i == 0){
+             array.push(i);
+         }
+     }
+     return array;
+ }
+
+ console.log(triangle,sum);
