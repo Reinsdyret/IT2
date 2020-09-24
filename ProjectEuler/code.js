@@ -402,29 +402,70 @@ console.log(prodDiagLeft);
  * PROBLEM 12
  * What is the value of the first triangle number to have over five hundred divisors?
  */
+let divisors = 1;
+ let triangle = 1;
+ while(divisors<= 500){
+     triangle++;
 
- let divisors = [];
- let triangle = 100000;
- while(divisors.length <= 500){
-    triangle++;
+
      let sum = triangleNum(triangle);
-     divisors = getDivisors(sum);
-     console.log(triangle);
+
+     let divisors = primeFactorial(sum);
+
+     console.log("triangle: " + triangle + " sum: " + sum + " Divisors: " + divisors);
      
  }
 
  function triangleNum(num){
-     return (num * num+1) / 2;
+     let temp = (num+1) / 2;
+     return temp * num;
  }
 
- function getDivisors(num){
-     let array = [];
-     for(let i = num; i >= 1; i--){
-         if(num % i == 0){
-             array.push(i);
-         }
-     }
-     return array;
- }
+ function isPrime(n){
+    if (n < 2) return false;
+    var q = Math.floor(Math.sqrt(n));
+    for (var i = 2; i <= q; i++)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+function primeFactorial(num){
+    // Is handed triangular number and calculates prime factors to calculate factorials
+    let temp = num;
 
- console.log(triangle,sum);
+    let hh = [];
+    for(let i = 0; i<= temp + 1; i++){
+        hh.push(1);
+    }
+	
+	for(let p = 2; (p*p) < temp; p++){
+		if (hh[p] == 1){
+            for(let i = (p*2); i<= temp; i = (i + p)){
+                hh[i] = 0; 
+            }
+        }
+    } 
+
+    console.log(hh);
+    let factorials = 1;
+    for(let p = 2; p <= temp; p++){
+        if(hh[p] == 1){
+            let count = 0;
+            if(temp % p == 0){
+                while(temp % p == 0){
+                    temp = temp / p;
+                    count += 1;
+                }
+                factorials *= (count+1);
+            }
+        }
+    }
+    return factorials;
+}
+
+
+ 
