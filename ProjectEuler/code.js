@@ -636,3 +636,76 @@ let length = 1;
  }
 
  console.log(pascal(20));*/
+
+ /**
+  * PROBLEM 16
+  * What is the sum of the digits of the number 2^1000?
+  */
+/*
+  let n = BigInt(Math.pow(2,1000));
+
+  let liste = splitNum(n);
+
+  console.log(sumDigits(liste));
+
+  function splitNum(num){
+    let temp = String(num);
+    let array = temp.split("");
+    return array;
+  }
+
+  function sumDigits(array){
+      let sum = 0;
+      for(let i = 0; i<=array.length -1; i++){
+        sum += parseInt(array[i]);
+      }
+      return sum;
+  }*/
+
+  /**
+   * PROBLEM 17
+   * If all the numbers from 1 to 1000 (one thousand) inclusive were written out in words, how many letters would be used?
+   */
+  let ones = ["",'one', 'two', 'three', 'four', 'five', 'six', 'seven','eight','nine'];
+  let tens = ['ten','eleven','twelve','thirteen','fourteen','fifteen','sixteen','seventeen','eighteen','nineteen'];
+  let twenties = ["",'twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
+  let hundreds = ['onehundred','twohundred','threehundred','fourhundred','fivehundred','sixhundred','sevenhundred','eighthundred','ninehundred'];
+  let thousand = 'onethousand';
+
+  function makeString(){
+      let string = "";
+    for(let one = 1; one<10; one++){
+        string+=ones[one];
+    }
+    for(let elevens = 0; elevens<10;elevens++){
+        string+=tens[elevens];
+    }
+    for(let ten = 1; ten <9; ten++){
+        for(let one = 0; one < 10; one++){
+            string+= twenties[ten] + ones[one];
+        }
+    }
+    for(let hundred = 0; hundred<9; hundred++){
+        for(let elevens = 0; elevens<10; elevens++){
+            string+=hundreds[hundred] + "and" + tens[elevens];
+        }
+        for(let ten = 0; ten < 9; ten++){
+            for(let one = 0; one < 10; one++){
+                string += hundreds[hundred] + "and" + twenties[ten] + ones[one];
+            }
+        }
+    }
+    string+=thousand;
+    return string; 
+}
+
+function getLetters(str){
+    let letters = 0;
+    let temp = str.split("");
+    letters += temp.length;
+    console.log(str);
+    console.log(temp);
+    return letters;
+}
+
+console.log(getLetters(makeString()));
