@@ -1,9 +1,16 @@
 let pre = document.getElementById("pre");
-let time = 0;
+let last = 0, mean = 1;
 
-function everyFourth(){
-    time += 0.25
-    pre.innerHTML = time;
+function everyFourth(){ pre.innerHTML = "number" + "\t" + "sum" + "\t" + "mean" + "\n";
+    /*time += 0.25
+    pre.innerHTML = time;*/
+    for(let i = 1; i<=10; i++){
+        pre.innerHTML += i + "\t";
+        pre.innerHTML += i+last + "\t" + mean + "\n";
+        mean+=0.5;
+        last += i;
+    }
+
 }
 
-setInterval(everyFourth,250);
+setInterval(everyFourth());

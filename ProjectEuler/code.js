@@ -674,24 +674,24 @@ let length = 1;
 
   function makeString(){
       let string = "";
-    for(let one = 1; one<10; one++){
-        string+=ones[one];
+    for(let one = 1; one<6; one++){
+        string+=ones[one]+ "";
     }
     for(let elevens = 0; elevens<10;elevens++){
-        string+=tens[elevens];
+        string+=tens[elevens]+ "";
     }
     for(let ten = 1; ten <9; ten++){
         for(let one = 0; one < 10; one++){
-            string+= twenties[ten] + ones[one];
+            string+= twenties[ten] + ones[one]+ "";
         }
     }
     for(let hundred = 0; hundred<9; hundred++){
         for(let elevens = 0; elevens<10; elevens++){
-            string+=hundreds[hundred] + "and" + tens[elevens];
+            string+=hundreds[hundred] + "and" + tens[elevens] + "";
         }
         for(let ten = 0; ten < 9; ten++){
             for(let one = 0; one < 10; one++){
-                string += hundreds[hundred] + "and" + twenties[ten] + ones[one];
+                string += hundreds[hundred] + "and" + twenties[ten] + ones[one]+ "";
             }
         }
     }
@@ -700,12 +700,7 @@ let length = 1;
 }
 
 function getLetters(str){
-    let letters = 0;
-    let temp = str.split("");
-    letters += temp.length;
-    console.log(str);
-    console.log(temp);
-    return letters;
+    return str.length;
 }
-
+console.log(makeString());
 console.log(getLetters(makeString()));
