@@ -671,31 +671,51 @@ let length = 1;
   let twenties = ["",'twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety'];
   let hundreds = ['onehundred','twohundred','threehundred','fourhundred','fivehundred','sixhundred','sevenhundred','eighthundred','ninehundred'];
   let thousand = 'onethousand';
-
+  let count = 0;
   function makeString(){
-      let string = "";
+    let string = "";
+    
     for(let one = 1; one<6; one++){
-        string+=ones[one]+ "";
+        string+=ones[one];
+        count+= ones[one].length;
     }
     for(let elevens = 0; elevens<10;elevens++){
-        string+=tens[elevens]+ "";
+        string+=tens[elevens];
+        count+=tens[elevens].length;
     }
     for(let ten = 1; ten <9; ten++){
         for(let one = 0; one < 10; one++){
-            string+= twenties[ten] + ones[one]+ "";
+            string+= twenties[ten] + ones[one];
+            count+=twenties[ten].length;
+            count+=ones[one].length;
         }
     }
     for(let hundred = 0; hundred<9; hundred++){
         for(let elevens = 0; elevens<10; elevens++){
-            string+=hundreds[hundred] + "and" + tens[elevens] + "";
+            if(elevens == 0){
+                string+=hundreds[hundred] + tens[elevens];
+                count+=hundreds[hundred].length + tens[elevens].length;
+            }else{
+                string+=hundreds[hundred] + "and" + tens[elevens];
+                count+=hundreds[hundred].length + 3 + tens[elevens].length;
+            }
+            
         }
         for(let ten = 0; ten < 9; ten++){
             for(let one = 0; one < 10; one++){
-                string += hundreds[hundred] + "and" + twenties[ten] + ones[one]+ "";
+                if(one==0){
+                    string+= hundreds[hundred] + twenties[ten] + ones[one];
+                    count+=hundreds[hundred].length + twenties[ten].length + ones[one].length;
+                }else{
+                    string += hundreds[hundred] + "and" + twenties[ten] + ones[one];
+                    count+=hundreds[hundred].length + 3 + twenties[ten].length + ones[one].length;
+                }
+                
             }
         }
     }
     string+=thousand;
+    count += thousand.length;
     return string; 
 }
 
@@ -703,4 +723,5 @@ function getLetters(str){
     return str.length;
 }
 console.log(makeString());
+console.log(count);
 console.log(getLetters(makeString()));

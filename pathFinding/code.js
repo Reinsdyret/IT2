@@ -2,14 +2,16 @@ let canvas = document.getElementById("canv");
 let ctx = canvas.getContext('2d');
 
 let maze =[
-    [0,1,1],
-    [0,0,1],
-    [1,0,2]
+    [1,1,1,1],
+    [1,0,1,1,1],
+    [1,0,0,1,1],
+    [1,1,0,2,1],
+    [1,1,1,1]
 ];
 let lastPosition;
 let position = {
-    x:0,
-    y:0
+    x:1,
+    y:1
 };
 
 let goal = {
@@ -42,14 +44,18 @@ function checkGoal(pos,goal){
 function move(m,x,y){
     let moves = [];
     for(let i = 0; i<4;i++){
-        if(m[y - 1][x] != "Undefined"  && m[y - 1][x] != 1){
-            moves.push([y-1,x]);
-        }else if(m[y + 1][x] != "Undefined"  && m[y + 1][x] != 1){
-            moves.push([y+1,x]);
-        }else if(m[y][x-1] != "Undefined"  && m[y][x - 1] != 1){
+        if(m[y][x-1] != "Undefined"  && m[y][x - 1] != 1){
             moves.push([y,x-1]);
+            x-=1;
         }else if(m[y][x+1] != "Undefined"  && m[y][x + 1] != 1){
             moves.push([y,x+1]);
+            x+=1;
+        }else if(m[y + 1][x] != "Undefined"  && m[y + 1][x] != 1){
+            moves.push([y+1,x]);
+            y+=1;
+        }else if(m[y - 1][x] != "Undefined"  && m[y - 1][x] != 1){
+            moves.push([y-1,x]);
+            y-=1;
         }
     }
     return moves;
