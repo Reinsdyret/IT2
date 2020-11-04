@@ -710,7 +710,6 @@ let length = 1;
                     string += hundreds[hundred] + "and" + twenties[ten] + ones[one];
                     count+=hundreds[hundred].length + 3 + twenties[ten].length + ones[one].length;
                 }
-                
             }
         }
     }
