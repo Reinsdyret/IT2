@@ -8,3 +8,4 @@ btnYes.onclick = function() {
 btnNo.onclick = function() {
     pOutput.innerHTML = "no";
 }
+eee
