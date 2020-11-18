@@ -1,0 +1,38 @@
+body{
+    font-weight: 800;
+}
+
+fieldset{
+    display: grid;
+    grid-template-columns:500px 500px ;
+    grid-template-rows: 1fr 1fr 1fr 2fr 1fr 1fr 1fr;
+    width: 1000px;
+    height: 520px;
+}
+
+#canvas{
+    grid-area: 1/1/7/2;
+}
+
+#generations{
+    grid-area: 1/2/2/3;
+}
+
+#currentPopulation{
+    grid-area: 2/2/3/3;
+}
+
+#generationsPerSeconds{
+    grid-area: 4/2/5/3;
+}
+#generationsPerSecondsLabel{
+    grid-area: 4/2/5/3;
+}
+
+#generationsPerSecondsPre{
+    grid-area: 5/2/6/3;
+}
+
+#btnStart{
+    grid-area: 6/2/7/3;
+}
