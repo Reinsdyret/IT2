@@ -11,10 +11,16 @@ let world, generations, interval;
 btnStart.onclick = function(){
     generations = 0;
     world = populate(100);
+    /*world = [
+        [0,0,1,1],
+        [1,0,0,0],
+        [1,1,0,0],
+        [0,0,0,1]
+    ];*/
     if(interval){
         clearInterval(interval);
     }
-    interval = setInterval(run, 1000 / generationsPerSecond.value);
+    interval = setInterval(run, 1000/generationsPerSecond.value);
     preGenerationsPerSeconds.innerHTML = generationsPerSecond.value + " generations per second."
 }
 
@@ -59,24 +65,27 @@ function populate(size){
 function aliveNextGeneration(arr){
     //Takes in 3x3 array with cell under investigation as arr[1][1]. Based on rules for survival it returns true or false.
     let populationAroundCenter = 0;
-    let aliveNow = arr[1][1];
+    let aliveNow = arr[1][1] == 1;
+    
+
     for(let i = 0; i<arr.length; i++){
         for(let j = 0; j<arr[i].length; j++){
-            if(!(i==1 && j == 1) && world[i][j] == 1){
-                populationAroundCenter++;
-            }
+            if(arr[i][j] === 1) {populationAroundCenter++;}
         }
     }
 
     if(aliveNow){
+        populationAroundCenter--;
         if(populationAroundCenter < 2 || populationAroundCenter > 3){
             return false;
         }else{
             return true;
         }
     }else{
-        if(populationAroundCenter == 3){
+        if(populationAroundCenter === 3){
             return true;
+        }else{
+            return false;
         }
     }
 }
@@ -97,7 +106,6 @@ function drawWorld(world){
 
 function nextGeneration(world){
     //Take in current world and return next generation array.
-    console.log(world);
     let newWorld = new Array(world.length);
     for(let i = 0; i<newWorld.length; i++){
         newWorld[i] = new Array(newWorld.length);
@@ -107,9 +115,9 @@ function nextGeneration(world){
         for(let col = 0; col<world[row].length; col++){
             let cellBlock = [
                 [
-                world[(row + world.length + 1 + world.length) % world.length] [(col -1 + world.length) % world.length], 
-                world[(row + world.length + 1 + world.length) % world.length] [(col)],
-                world[(row + world.length + 1 + world.length) % world.length] [(col + 1) % world.length]
+                world[(row + world.length - 1) % world.length] [(col -1 + world.length) % world.length], 
+                world[(row + world.length -1) % world.length] [(col)],
+                world[(row + world.length - 1) % world.length] [(col + 1) % world.length]
                 ],
                 [
                 world[row] [(col -1 + world.length) % world.length],
@@ -122,7 +130,6 @@ function nextGeneration(world){
                 world[(row + 1 + world.length) % world.length] [(col + 1) % world.length]
                 ]
             ];
-            console.log(cellBlock);
             if(aliveNextGeneration(cellBlock)){
                 newWorld[row][col] = 1;
             }else{
