@@ -10,7 +10,7 @@ let world, generations, interval;
 
 btnStart.onclick = function(){
     generations = 0;
-    world = populate(25);
+    world = populate(100);
     if(interval){
         clearInterval(interval);
     }
@@ -19,8 +19,8 @@ btnStart.onclick = function(){
 }
 
 function run(){
-    currentPopulation.innerHTML = population(world);
-    preGenerations.innerHTML = generations;
+    currentPopulation.innerHTML = "Current Population \t \t \t" + population(world);
+    preGenerations.innerHTML = "Generations \t \t \t \t" + generations;
     drawWorld(world);
     world = nextGeneration(world);
 
@@ -43,15 +43,13 @@ function population(world){
 function populate(size){
     //Recieves size of array and returns array of randomly generated cells.
     let arr = new Array(size);
-    let randInt;
     for(let i = 0; i<arr.length; i++){
         arr[i] = new Array(size);
     }
 
     for(let i = 0; i<arr.length; i++){
         for(let j = 0; j<arr[i].length; j++){
-            randInt = Math.floor(Math.random() * 2 - 1);
-            arr[i][j] = randInt;
+            arr[i][j] = Math.floor(Math.random() * 2);
         }
     }
 
@@ -61,19 +59,25 @@ function populate(size){
 function aliveNextGeneration(arr){
     //Takes in 3x3 array with cell under investigation as arr[1][1]. Based on rules for survival it returns true or false.
     let populationAroundCenter = 0;
+    let aliveNow = arr[1][1];
     for(let i = 0; i<arr.length; i++){
         for(let j = 0; j<arr[i].length; j++){
-            if(arr[i][j] == 1 && (i != 1 || j != 1)){
-                console.log(i,j);
+            if(!(i==1 && j == 1) && world[i][j] == 1){
                 populationAroundCenter++;
             }
         }
     }
 
-    if(populationAroundCenter == 2 && arr[1][1] == 1 || populationAroundCenter == 3){
-        return true;
+    if(aliveNow){
+        if(populationAroundCenter < 2 || populationAroundCenter > 3){
+            return false;
+        }else{
+            return true;
+        }
     }else{
-        return false;
+        if(populationAroundCenter == 3){
+            return true;
+        }
     }
 }
 
@@ -93,35 +97,36 @@ function drawWorld(world){
 
 function nextGeneration(world){
     //Take in current world and return next generation array.
+    console.log(world);
     let newWorld = new Array(world.length);
-    let cellBlock;
     for(let i = 0; i<newWorld.length; i++){
         newWorld[i] = new Array(newWorld.length);
     }
 
     for(let row = 0; row<world.length; row++){
         for(let col = 0; col<world[row].length; col++){
-            cellBlock = [
+            let cellBlock = [
                 [
-                world[(row + world.length + 1) % world.length, (col + world.length + 1) % world.length], 
-                world[(row + world.length + 1) % world.length, (col)],
-                world[(row + world.length + 1) % world.length, (col + 1) % world.length]
+                world[(row + world.length + 1 + world.length) % world.length] [(col -1 + world.length) % world.length], 
+                world[(row + world.length + 1 + world.length) % world.length] [(col)],
+                world[(row + world.length + 1 + world.length) % world.length] [(col + 1) % world.length]
                 ],
                 [
-                world[row, (col + world.length + 1) % world.length],
-                world[row, col],
-                world[row, (col + 1) % world.length]
+                world[row] [(col -1 + world.length) % world.length],
+                world[row] [col],
+                world[row] [(col + 1 + world.length) % world.length]
                 ],
                 [
-                world[(row + 1) % world.length, (col + world.length + 1) % world.length],
-                world[(row + 1) % world.length, col],
-                world[(row + 1) % world.length, (col + 1) % world.length]
+                world[(row + 1 + world.length) % world.length] [(col -1 + world.length) % world.length],
+                world[(row + 1 + world.length) % world.length] [col],
+                world[(row + 1 + world.length) % world.length] [(col + 1) % world.length]
                 ]
             ];
+            console.log(cellBlock);
             if(aliveNextGeneration(cellBlock)){
-                newWorld[row,col] = 1;
+                newWorld[row][col] = 1;
             }else{
-                newWorld[row,col] = 0;
+                newWorld[row][col] = 0;
             }
         }
     }
