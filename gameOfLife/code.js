@@ -10,7 +10,7 @@ let world, generations, interval;
 
 btnStart.onclick = function(){
     generations = 0;
-    world = populate(100);
+    world = populate(1000);
     /*world = [
         [0,0,1,1],
         [1,0,0,0],
