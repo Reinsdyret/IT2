@@ -73,10 +73,17 @@ function move(col1,col2){
 }
 draw(numbers);
 function draw(blocks){
-    ctx.rect(95,0,10,100);
+    ctx.fillRect(0,100,canvas.clientWidth,10);
+    for(let i = 0; i<3; i++){
+        ctx.fillRect(canvas.width/3 * i + 100,0,10,100);
+    }
     for(let i = 0; i<3; i++){
         for(let j = 0; j<blocks[i].length; j++){
-
+            let x = i * 100 + 100 - (blocks[i][j] * 7.5);
+            let y = 100 - (j * 10);
+            let width = blocks[i][j] * 15 + 10;
+            let height = 10;
+            ctx.fillRect(x,y,width,height);
         }
     }
 }
