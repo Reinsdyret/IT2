@@ -1,6 +1,12 @@
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
+let startVariable = document.getElementById("startVariable");
+let ruleVariables = document.getElementById("ruleVariables");
+let rules = document.getElementById("rules");
+let gens = document.getElementById("generations");
+let btnRun = document.getElementById("btnRun");
+
 let theta = (2*Math.PI) / 360 * 25.7;
 let length = 1;
 
@@ -14,11 +20,35 @@ let commands = [
 
 let stack = [];
 
-draw(grow("F",5));
 
-function grow(str,generations){
-    let ruleVar = ["F","X"];
-    let rule = ["F[+F]F[-F]F","F[-X][X]F[-X]+FX"];
+
+btnRun.onclick = function(){
+    let vars = [];
+    let ruless = [];
+    let temp = "";
+    for(let i = 0; i<ruleVariables.value.length; i++){
+        if(ruleVariables.value[i] == ","){
+            vars.push(temp);
+        }else{
+            temp += ruleVariables.value;
+        }
+    }
+    vars.push(temp);
+    temp = "";
+    for(let i = 0; i<rules.value.length; i++){
+        if(rules.value[i] == ","){
+            ruless.push(temp);
+        }else{
+            temp += rules.value;
+        }
+    }
+    ruless.push(temp);
+    draw(grow(startVariable.value,gens.value,vars,ruless));
+}
+
+function grow(str,generations,vars,ruless){
+    let ruleVar = vars;
+    let rule = ruless;
     let strCopy = str;
     let newStr = "";
     for(let j = 0; j<generations; j++){
@@ -66,8 +96,8 @@ function posPush(){
 function posPop(){
     vectorPos = stack[stack.length -1].pos;
     vectorMove = stack[stack.length -1].move;
-    stack.pop();
     ctx.moveTo(vectorPos.x,vectorPos.y);
+    stack.pop();
 }
 
 function rotateClock(){
