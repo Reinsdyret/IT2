@@ -8,7 +8,7 @@ let gens = document.getElementById("generations");
 let btnRun = document.getElementById("btnRun");
 
 let theta = (2*Math.PI) / 360 * 25.7;
-let length = 1;
+let length = 10;
 
 let vectorMove = new Vector(0,-1);
 let vectorPos = new Vector(canvas.width/2,canvas.height/2);
