@@ -35,5 +35,5 @@ fieldset#main{
     grid-row: 1/9;
     grid-column: 2/4;
     font-size: 40px;
-    height: 350px;
+    height: 350px;;
 }
