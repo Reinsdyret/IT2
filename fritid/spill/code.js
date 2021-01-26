@@ -7,11 +7,11 @@ let world = {
     width : canvas.width,
     height : canvas.height,
     enemyBlocks : [],
-    player: new Block(this.width/2,this.height/2,0,0,false),
+    player: new Block(this.width/2,this.height/2,0,0,false,10),
     enemyPopulation : 25,
     populate(){
         for(let i = 0; i<this.enemyPopulation; i++){
-            this.enemyBlocks.push(new Block(-100,-100,0,0,true));
+            this.enemyBlocks.push(new Block(-100,-100,0,0,true,20));
         }
     },
 
@@ -43,6 +43,8 @@ document.addEventListener('keydown',movePlayer);
 
 let startTime = Date.now();
 
+
+setInterval(loop,500);
 function loop(){
     ctx.clearRect(0,0,world.width,world.height);
     for(let i = 0; i<world.enemyPopulation; i++){
@@ -61,7 +63,6 @@ function loop(){
     world.player.draw(ctx);
     world.score = Date.now() - startTime;
     preScore.innerHTML = world.score;
-    requestAnimationFrame(loop);
 }
 
 
@@ -77,4 +78,3 @@ function movePlayer(e){
     }
 }
 
-requestAnimationFrame(loop);
