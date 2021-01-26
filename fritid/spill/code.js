@@ -7,8 +7,13 @@ let world = {
     width : canvas.width,
     height : canvas.height,
     enemyBlocks : [],
+<<<<<<< HEAD
     player: new Block(this.width/2,this.height/2,0,0,false,10),
     enemyPopulation : 25,
+=======
+    player: new Block(this.width/2,this.height/2,0,0,false),
+    enemyPopulation : 50,
+>>>>>>> 50eaf004cf8ac803695244bb48c03a08073c2e8d
     populate(){
         for(let i = 0; i<this.enemyPopulation; i++){
             this.enemyBlocks.push(new Block(-100,-100,0,0,true,20));
